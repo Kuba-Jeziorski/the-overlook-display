@@ -1,8 +1,21 @@
-# React + Vite
+# The Overlook Display
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+In this project I am fetching Stephen King's books data and operating on this content.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+
+Main features used in this project:
+
+- React
+- React Router
+- useState, useEffect
+- Vite
+- REST API fetching
+- CSS modules for styling
+
+## Starting the project
+
+1. npm install
+2. npm run dev
