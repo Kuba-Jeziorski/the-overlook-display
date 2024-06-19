@@ -1,0 +1,8 @@
+nav {
+  display: flex;
+  gap: 20px;
+}
+
+nav.bordered {
+  border: 1px solid red;
+}

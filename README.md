@@ -10,7 +10,7 @@ Main features used in this project:
 
 - React
 - React Router
-- useState, useEffect
+- useState, useEffect, custom hook
 - Vite
 - REST API fetching
 - CSS modules for styling
