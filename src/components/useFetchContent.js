@@ -11,7 +11,6 @@ const useFetchContent = (url) => {
         setIsLoading(true);
         const res = await fetch(url);
         const data = await res.json();
-        console.log(data.data);
         setFetchedContent(data.data);
       } catch (error) {
         alert(`There was an error loading data: ${error.message}`);

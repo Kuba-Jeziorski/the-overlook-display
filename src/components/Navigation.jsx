@@ -7,6 +7,7 @@ function Navigation() {
     <nav className={styles.bordered}>
       <Link to="/">Home</Link>
       <Link to="books">Books</Link>
+      <Link to="villains">Villains</Link>
     </nav>
   );
 }
