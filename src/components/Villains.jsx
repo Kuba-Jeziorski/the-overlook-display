@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import useFetchContent from "./useFetchContent";
 
 function Villains({ url }) {
@@ -25,5 +26,9 @@ function Villains({ url }) {
     </div>
   );
 }
+
+Villains.propTypes = {
+  url: PropTypes.string,
+};
 
 export default Villains;

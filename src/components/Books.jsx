@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import useFetchContent from "./useFetchContent";
 
 function Books({ url }) {
@@ -22,5 +23,9 @@ function Books({ url }) {
     </div>
   );
 }
+
+Books.propTypes = {
+  url: PropTypes.string,
+};
 
 export default Books;
