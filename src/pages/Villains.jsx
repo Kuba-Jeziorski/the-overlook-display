@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
 import useFetchContent from "../hooks/useFetchContent";
 
-function Villains({ url }) {
-  const { fetchedContent, isLoading, isLoaded } = useFetchContent(
-    `https://stephen-king-api.onrender.com/api/${url}`
+function Villains({ url, villains, setVillains }) {
+  const { isLoading, isLoaded } = useFetchContent(
+    `https://stephen-king-api.onrender.com/api/${url}`,
+    villains,
+    setVillains
   );
 
   if (isLoading) {
@@ -13,14 +15,11 @@ function Villains({ url }) {
     return <div>Failed to load</div>;
   }
 
-  const fiveVillains = [...fetchedContent];
-  fiveVillains.length = 5;
-
   return (
     <div>
       <ul>
-        {fiveVillains.map((villain) => (
-          <li key={villain.types_id}>{villain.name}</li>
+        {villains.map((villain) => (
+          <li key={villain.id}>{villain.name}</li>
         ))}
       </ul>
     </div>
@@ -29,6 +28,8 @@ function Villains({ url }) {
 
 Villains.propTypes = {
   url: PropTypes.string,
+  villains: PropTypes.object,
+  setVillains: PropTypes.func,
 };
 
 export default Villains;

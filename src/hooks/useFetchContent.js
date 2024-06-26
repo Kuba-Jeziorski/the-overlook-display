@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useFetchContent = (url, state) => {
-  const [fetchedContent, setFetchedContent] = useState([]);
+const useFetchContent = (url, state, setState) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -14,8 +13,7 @@ const useFetchContent = (url, state) => {
           setIsLoading(true);
           const res = await fetch(url);
           const data = await res.json();
-          console.log(`fetching`);
-          setFetchedContent(data.data);
+          setState(data.data);
         } catch (error) {
           alert(`There was an error loading data: ${error.message}`);
         } finally {
@@ -25,12 +23,12 @@ const useFetchContent = (url, state) => {
       };
       fetchData();
     } else {
-      setFetchedContent(state);
+      setState(state);
       setIsLoaded(true);
     }
-  }, [url, isStateEmpty, state]);
+  }, [url, isStateEmpty, state, setState]);
 
-  return { fetchedContent, isLoading, isLoaded };
+  return { isLoading, isLoaded };
 };
 
 export default useFetchContent;

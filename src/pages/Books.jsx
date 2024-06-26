@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
 import useFetchContent from "../hooks/useFetchContent";
 
-function Books({ url, books }) {
-  const { fetchedContent, isLoading, isLoaded } = useFetchContent(
+function Books({ url, books, setBooks }) {
+  const { isLoading, isLoaded } = useFetchContent(
     `https://stephen-king-api.onrender.com/api/${url}`,
-    books
+    books,
+    setBooks
   );
 
   if (isLoading) {
@@ -17,7 +18,7 @@ function Books({ url, books }) {
   return (
     <div>
       <ul>
-        {fetchedContent.map((book) => (
+        {books.map((book) => (
           <li key={book.id}>{book.Title}</li>
         ))}
       </ul>
