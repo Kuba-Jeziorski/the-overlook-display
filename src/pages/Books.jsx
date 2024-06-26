@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
 import useFetchContent from "../hooks/useFetchContent";
 
-function Books({ url }) {
+function Books({ url, books }) {
   const { fetchedContent, isLoading, isLoaded } = useFetchContent(
-    `https://stephen-king-api.onrender.com/api/${url}`
+    `https://stephen-king-api.onrender.com/api/${url}`,
+    books
   );
 
   if (isLoading) {
@@ -26,6 +27,8 @@ function Books({ url }) {
 
 Books.propTypes = {
   url: PropTypes.string,
+  books: PropTypes.object,
+  setBooks: PropTypes.func,
 };
 
 export default Books;

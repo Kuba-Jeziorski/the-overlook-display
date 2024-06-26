@@ -7,19 +7,25 @@ import Footer from "./components/Footer";
 
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Homepage from "./pages/Homepage";
+import { MainContext } from "./contexts/MainContext.js";
+import { useState } from "react";
 
 function App() {
+  const [books, setBooks] = useState({});
+  const [villains, setVillains] = useState({});
+
   return (
     <BrowserRouter>
-      <>
-        <Navigation></Navigation>
+      <Navigation></Navigation>
+      <MainContext.Provider value={{ books, villains }}>
         <div className="home-bg">
           <Routes>
             <Route index element={<Homepage />} />
-            <Route path="books" element={<Books url="books" />} />
+            <Route path="books" element={<Books url="books" books={books} />} />
             <Route path="villains" element={<Villains url="villains" />} />
           </Routes>
         </div>
+
         <Footer>
           Design & code
           <Link
@@ -31,7 +37,7 @@ function App() {
             Kuba-Jeziorski
           </Link>
         </Footer>
-      </>
+      </MainContext.Provider>
     </BrowserRouter>
   );
 }
