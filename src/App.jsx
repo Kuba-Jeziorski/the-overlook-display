@@ -1,7 +1,7 @@
 import "../src/index.css";
 
-import Books from "./components/Books";
-import Villains from "./components/Villains";
+import Books from "./pages/Books";
+import Villains from "./pages/Villains";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 
@@ -13,14 +13,23 @@ function App() {
     <BrowserRouter>
       <>
         <Navigation></Navigation>
-        <Routes>
-          <Route index element={<Homepage />} />
-          <Route path="books" element={<Books url="books" />} />
-          <Route path="villains" element={<Villains url="villains" />} />
-        </Routes>
+        <div className="home-bg">
+          <Routes>
+            <Route index element={<Homepage />} />
+            <Route path="books" element={<Books url="books" />} />
+            <Route path="villains" element={<Villains url="villains" />} />
+          </Routes>
+        </div>
         <Footer>
           Design & code
-          <Link to="https://github.com/Kuba-Jeziorski"> Kuba-Jeziorski</Link>
+          <Link
+            to="https://github.com/Kuba-Jeziorski"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Kuba_Jeziorski Github page"
+          >
+            Kuba-Jeziorski
+          </Link>
         </Footer>
       </>
     </BrowserRouter>

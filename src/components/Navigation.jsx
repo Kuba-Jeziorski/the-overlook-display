@@ -4,9 +4,7 @@ import { NavLink } from "react-router-dom";
 function Navigation() {
   return (
     <nav>
-      <NavLink className={styles.logo} to="/">
-        <img src="/src/assets/img/logo-light.svg" />
-      </NavLink>
+      <NavLink className={styles.logo} to="/"></NavLink>
       <div className={styles.menu}>
         <NavLink to="books">Books</NavLink>
         <NavLink to="villains">Villains</NavLink>

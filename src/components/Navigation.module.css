@@ -1,5 +1,5 @@
 nav {
-  background-color: var(--color-navy);
+  background-color: var(--color-dark);
   padding: var(--distance-40);
   position: fixed;
   top: 0;
@@ -10,25 +10,50 @@ nav {
   justify-content: space-between;
 }
 
-a:focused {
-  text-decoration: underline;
-}
-
 a,
 a:visited {
-  color: var(--color-white);
+  color: var(--color-light);
 }
 
 a:hover {
-  color: var(--color-claret);
+  color: var(--color-red);
 }
 
 .menu {
   display: flex;
   gap: var(--distance-20);
+  align-items: center;
 }
 
-.logo img {
-  height: 18px;
-  width: auto;
+.menu a {
+  position: relative;
+}
+
+.menu a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  height: 1px;
+  width: 0;
+  background-color: var(--color-red);
+  transition: width 0.3s;
+}
+
+.menu a:hover::before {
+  width: 100%;
+}
+
+.logo {
+  height: var(--navigation-logo);
+  aspect-ratio: 4.87;
+  background-image: url("/src/assets/img/logo-fin-white.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: background-image 0.3s;
+}
+
+.logo:hover {
+  background-image: url("/src/assets/img/logo-fin-red.svg");
 }

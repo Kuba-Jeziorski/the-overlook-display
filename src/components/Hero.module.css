@@ -1,0 +1,7 @@
+.heroContainer {
+  max-width: 950px;
+}
+
+p {
+  color: var(--color-white);
+}

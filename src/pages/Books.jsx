@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import useFetchContent from "./useFetchContent";
+import useFetchContent from "../hooks/useFetchContent";
 
-function Villains({ url }) {
+function Books({ url }) {
   const { fetchedContent, isLoading, isLoaded } = useFetchContent(
     `https://stephen-king-api.onrender.com/api/${url}`
   );
@@ -13,22 +13,19 @@ function Villains({ url }) {
     return <div>Failed to load</div>;
   }
 
-  const fiveVillains = [...fetchedContent];
-  fiveVillains.length = 5;
-
   return (
     <div>
       <ul>
-        {fiveVillains.map((villain) => (
-          <li key={villain.types_id}>{villain.name}</li>
+        {fetchedContent.map((book) => (
+          <li key={book.id}>{book.Title}</li>
         ))}
       </ul>
     </div>
   );
 }
 
-Villains.propTypes = {
+Books.propTypes = {
   url: PropTypes.string,
 };
 
-export default Villains;
+export default Books;

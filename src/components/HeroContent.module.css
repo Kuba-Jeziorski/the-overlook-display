@@ -1,0 +1,6 @@
+.heroContent {
+  display: flex;
+  width: 100%;
+  margin-top: var(--distance-40);
+  gap: var(--distance-40);
+}

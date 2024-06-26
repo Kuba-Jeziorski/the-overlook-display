@@ -1,0 +1,27 @@
+.heroItem {
+  width: calc(50% - (var(--distance-40) / 2));
+  height: 300px;
+  border-radius: var(--distance-20);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-end;
+  opacity: 0.75;
+  padding-left: var(--distance-20);
+  padding-bottom: var(--distance-20);
+  transition: opacity 0.3s;
+}
+
+.heroItem:hover {
+  opacity: 1;
+}
+
+.heroItem h2 {
+  color: var(--color-yellow);
+  transition: color 0.3s;
+}
+
+.heroItem:hover h2 {
+  color: var(--color-white);
+}
