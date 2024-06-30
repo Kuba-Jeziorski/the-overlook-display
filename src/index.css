@@ -49,15 +49,15 @@
   src: url("../src/assets/fonts/oswald-v53-latin-600.woff2") format("woff2");
 }
 
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: var(--distance-5);
 }
 
-body::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: var(--color-dark);
 }
 
-body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background-color: var(--color-red);
 }
 

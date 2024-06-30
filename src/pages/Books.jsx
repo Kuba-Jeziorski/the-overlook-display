@@ -1,7 +1,11 @@
 import PropTypes from "prop-types";
+import { useMainContext } from "../contexts/MainContext";
+import styles from "./Books.module.css";
 import useFetchContent from "../hooks/useFetchContent";
 
-function Books({ url, books, setBooks }) {
+function Books({ url }) {
+  const { books, setBooks } = useMainContext();
+
   const { isLoading, isLoaded } = useFetchContent(
     `https://stephen-king-api.onrender.com/api/${url}`,
     books,
@@ -16,7 +20,7 @@ function Books({ url, books, setBooks }) {
   }
 
   return (
-    <div>
+    <div className={styles.myBooks}>
       <ul>
         {books.map((book) => (
           <li key={book.id}>{book.Title}</li>

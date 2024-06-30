@@ -1,7 +1,10 @@
 import PropTypes from "prop-types";
 import useFetchContent from "../hooks/useFetchContent";
+import { useMainContext } from "../contexts/MainContext";
 
-function Villains({ url, villains, setVillains }) {
+function Villains({ url }) {
+  const { villains, setVillains } = useMainContext();
+
   const { isLoading, isLoaded } = useFetchContent(
     `https://stephen-king-api.onrender.com/api/${url}`,
     villains,

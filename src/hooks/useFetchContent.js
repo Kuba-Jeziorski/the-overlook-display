@@ -28,6 +28,7 @@ const useFetchContent = (url, state, setState) => {
     }
   }, [url, isStateEmpty, state, setState]);
 
+  // state and setState don't need to be returned, becouse they are already changed in context
   return { isLoading, isLoaded };
 };
 
