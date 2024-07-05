@@ -40,7 +40,6 @@
   font-weight: 400;
   src: url("../src/assets/fonts/oswald-v53-latin-regular.woff2") format("woff2");
 }
-/* oswald-600 - latin */
 @font-face {
   font-display: swap;
   font-family: "Oswald";
