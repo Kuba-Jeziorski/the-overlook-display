@@ -6,6 +6,9 @@
   justify-content: flex-end;
   align-items: center;
   font-size: var(--font-size-12);
+  position: fixed;
+  width: 100%;
+  z-index: 10;
 }
 
 .footer a {
