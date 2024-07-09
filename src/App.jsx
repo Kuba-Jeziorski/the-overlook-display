@@ -7,6 +7,8 @@ import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import { MainProvider } from "./contexts/MainContext.jsx";
 import "../src/index.css";
+import Villain from "./pages/Villain.jsx";
+import Book from "./pages/Book.jsx";
 
 function App() {
   return (
@@ -16,8 +18,10 @@ function App() {
         <div className="home-bg">
           <Routes>
             <Route index element={<Homepage />} />
-            <Route path="books" element={<Books url="books" />} />
-            <Route path="villains" element={<Villains url="villains" />} />
+            <Route path="/books" element={<Books url="books" />} />
+            <Route path="/books/:id" element={<Book />} />
+            <Route path="/villains" element={<Villains url="villains" />} />
+            <Route path="/villains/:id" element={<Villain />} />
           </Routes>
         </div>
         <Footer>

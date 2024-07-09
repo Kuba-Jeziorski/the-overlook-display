@@ -1,13 +1,22 @@
 import PropTypes from "prop-types";
+import { useEffect } from "react";
+
 import useFetchContent from "../hooks/useFetchContent";
 import { useMainContext } from "../contexts/MainContext";
 import Title from "../components/Title";
 import HeaderDescription from "../components/HeaderDescription";
 import Button from "../components/Button";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Villains({ url }) {
-  const { villains, setVillains } = useMainContext();
+  const {
+    villains,
+    setVillains,
+    villainsAmount,
+    setVillainsAmount,
+    villainsListing,
+    setVillainsListing,
+  } = useMainContext();
 
   const { isLoading, isLoaded } = useFetchContent(
     `https://stephen-king-api.onrender.com/api/${url}`,
@@ -15,16 +24,12 @@ function Villains({ url }) {
     setVillains
   );
 
-  const [villainsAmount, setVillainsAmount] = useState(0);
-  const [villainsListing, setVillainsListing] = useState([]);
-
   useEffect(() => {
     if (isLoaded) {
-      const newVillainsListing = villains.slice(0, 3);
-      setVillainsAmount((amount) => amount + 3);
+      const newVillainsListing = villains.slice(0, villainsAmount);
       setVillainsListing(newVillainsListing);
     }
-  }, [villains, isLoaded]);
+  }, [villains, isLoaded, villainsAmount, setVillainsListing]);
 
   const handleAmount = () => {
     setVillainsAmount((amount) => amount + 3);
@@ -63,7 +68,9 @@ function Villains({ url }) {
                 {villain.id}. {villain.name.toUpperCase()}
               </p>
               <p className="big bold">STATUS: {villain.status.toUpperCase()}</p>
-              <Button type="primary">SEE MORE</Button>
+              <Link className="link primary" to={`/villains/${villain.id}`}>
+                SEE MORE
+              </Link>
             </li>
           ))}
         </ul>
