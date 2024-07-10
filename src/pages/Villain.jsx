@@ -4,13 +4,13 @@ import useFetchContent from "../hooks/useFetchContent";
 import Title from "../components/Title";
 
 function Villain() {
-  const url2 = "villains";
+  const parentUrl = "villains";
   let { id } = useParams();
   id = Number(id);
   const { villains, setVillains } = useMainContext();
 
   const { isLoading, isLoaded } = useFetchContent(
-    `https://stephen-king-api.onrender.com/api/${url2}`,
+    `https://stephen-king-api.onrender.com/api/${parentUrl}`,
     villains,
     setVillains
   );
@@ -33,8 +33,6 @@ function Villain() {
   const { id: index, books, name, gender, status } = currentVillain;
 
   const isBooksEmpty = books.length === 0;
-  console.log(currentVillain);
-  console.log(`will it be shown?`, !isBooksEmpty);
 
   let bookTitle, bookURL, bookId;
   if (!isBooksEmpty) {
@@ -43,7 +41,7 @@ function Villain() {
   }
 
   return (
-    <div className="wrapper-small">
+    <div className="wrapper-small centered">
       <div className="container">
         <Title tag="h1">{name}</Title>
         <div className="single-item-wrapper">

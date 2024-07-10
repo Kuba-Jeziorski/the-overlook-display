@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import { useEffect } from "react";
+import { useMainContext } from "../contexts/MainContext";
+import { Link } from "react-router-dom";
 
 import useFetchContent from "../hooks/useFetchContent";
-import { useMainContext } from "../contexts/MainContext";
 import Title from "../components/Title";
 import HeaderDescription from "../components/HeaderDescription";
 import Button from "../components/Button";
-import { Link } from "react-router-dom";
 
 function Villains({ url }) {
   const {

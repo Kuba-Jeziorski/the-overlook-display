@@ -269,6 +269,11 @@ nav a.active::before {
   height: 100%;
 }
 
+.wrapper-small.centered {
+  display: flex;
+  align-items: center;
+}
+
 .order-buttons-wrapper {
   display: flex;
   gap: var(--distance-20);

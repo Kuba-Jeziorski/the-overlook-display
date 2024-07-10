@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useMainContext } from "../contexts/MainContext";
 
 import useFetchContent from "../hooks/useFetchContent";
-import { useMainContext } from "../contexts/MainContext";
 import Title from "../components/Title";
 import HeaderDescription from "../components/HeaderDescription";
 import Button from "../components/Button";
@@ -68,7 +69,9 @@ function Books({ url }) {
                 {book.id}. {book.Title.toUpperCase()}
               </p>
               <p className="big bold">YEAR: {book.Year}</p>
-              <Button type="primary">SEE MORE</Button>
+              <Link className="link primary" to={`/books/${book.id}`}>
+                SEE MORE
+              </Link>
             </li>
           ))}
         </ul>
@@ -80,16 +83,6 @@ function Books({ url }) {
       </div>
     </div>
   );
-
-  // return (
-  //   <div className={styles.myBooks}>
-  //     <ul>
-  //       {books.map((book) => (
-  //         <li key={book.id}>{book.Title}</li>
-  //       ))}
-  //     </ul>
-  //   </div>
-  // );
 }
 
 Books.propTypes = {
