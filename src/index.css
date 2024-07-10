@@ -1,14 +1,14 @@
 :root {
   /* Colors */
   --color-white: #fff;
-  --color-white-faded: rgba(255, 255, 255, 0.5);
+  --color-white-faded: rgba(255, 255, 255, 0.65);
   --color-light: #989898;
   --color-dark: #000006;
-  --color-dark-faded: rgba(0, 0, 6, 0.5);
+  --color-dark-faded: rgba(0, 0, 6, 0.65);
   --color-red: #a92930;
-  --color-red-faded: rgba(169, 41, 48, 0.5);
+  --color-red-faded: rgba(169, 41, 48, 0.65);
   --color-yellow: #e2a42b;
-  --color-yellow-faded: rgba(226, 164, 43, 0.5);
+  --color-yellow-faded: rgba(226, 164, 43, 0.65);
 
   /* Widths */
   --distance-5: 5px;
