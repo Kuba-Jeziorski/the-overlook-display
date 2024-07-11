@@ -6,8 +6,22 @@ function Navigation() {
     <nav>
       <NavLink className={styles.logo} to="/"></NavLink>
       <div className={styles.menu}>
-        <NavLink to="books">Books</NavLink>
-        <NavLink to="villains">Villains</NavLink>
+        <NavLink
+          className={({ isActive, isPending }) =>
+            isPending ? "pending" : isActive ? styles.active : ""
+          }
+          to="books"
+        >
+          Books
+        </NavLink>
+        <NavLink
+          className={({ isActive, isPending }) =>
+            isPending ? "pending" : isActive ? styles.active : ""
+          }
+          to="villains"
+        >
+          Villains
+        </NavLink>
       </div>
     </nav>
   );

@@ -216,13 +216,13 @@ ul {
 }
 
 /* to remove in the future */
-a.active {
+/* a.active {
   color: var(--color-red);
 }
 
 nav a.active::before {
   width: 100%;
-}
+} */
 
 :is(.wrapper-medium, .wrapper-small) .link {
   font-size: var(--font-size-18);

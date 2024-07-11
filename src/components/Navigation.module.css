@@ -16,6 +16,10 @@ a:visited {
   color: var(--color-light);
 }
 
+.active {
+  color: var(--color-red) !important;
+}
+
 /* a.active, */
 a:hover {
   color: var(--color-red);
@@ -41,8 +45,8 @@ a:hover {
   background-color: var(--color-red);
   transition: width 0.3s;
 }
-/* .menu a.active::before, */
-.menu a:hover::before {
+.menu > a.active::before,
+.menu > a:hover::before {
   width: 100%;
 }
 
