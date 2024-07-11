@@ -1,47 +1,29 @@
 import PropTypes from "prop-types";
-import { useEffect } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { useMainContext } from "../contexts/MainContext";
 
-import useFetchContent from "../hooks/useFetchContent";
+import { useBooks } from "../hooks/useFetchContent";
 import Title from "../components/Title";
 import HeaderDescription from "../components/HeaderDescription";
 import Button from "../components/Button";
 
-function Books({ url }) {
-  const {
-    books,
-    setBooks,
-    booksAmount,
-    setBooksAmount,
-    booksListing,
-    setBooksListing,
-  } = useMainContext();
+function Books() {
+  const [booksAmount, setBooksAmount] = useState(3);
 
-  const { isLoading, isLoaded } = useFetchContent(
-    `https://stephen-king-api.onrender.com/api/${url}`,
-    books,
-    setBooks
-  );
+  const { books, loadingStatus } = useBooks();
 
-  useEffect(() => {
-    if (isLoaded) {
-      const newBooksListing = books.slice(0, booksAmount);
-      setBooksListing(newBooksListing);
-    }
-  }, [books, isLoaded, booksAmount, setBooksListing]);
-
-  const handleAmount = () => {
+  const handleAmountIncrease = () => {
     setBooksAmount((amount) => amount + 3);
-
-    const newBooksListing = books.slice(0, booksAmount);
-    setBooksListing(newBooksListing);
   };
 
-  if (isLoading) {
+  const booksListing = useMemo(() => {
+    return books.slice(0, booksAmount);
+  }, [books, booksAmount]);
+
+  if (loadingStatus === "pending") {
     return <div>Loading...</div>;
   }
-  if (!isLoaded) {
+  if (loadingStatus === "failed") {
     return <div>Failed to load</div>;
   }
 
@@ -76,7 +58,7 @@ function Books({ url }) {
           ))}
         </ul>
         <div className="button-wrapper">
-          <Button type="tertiary" onPress={handleAmount}>
+          <Button type="tertiary" onPress={handleAmountIncrease}>
             SEE MORE
           </Button>
         </div>

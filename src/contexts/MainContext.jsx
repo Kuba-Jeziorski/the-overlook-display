@@ -4,14 +4,8 @@ import PropTypes from "prop-types";
 const MainContext = createContext();
 
 function MainProvider({ children }) {
-  const [books, setBooks] = useState({});
-  const [villains, setVillains] = useState({});
-
-  const [villainsAmount, setVillainsAmount] = useState(3);
-  const [villainsListing, setVillainsListing] = useState([]);
-
-  const [booksAmount, setBooksAmount] = useState(3);
-  const [booksListing, setBooksListing] = useState([]);
+  const [books, setBooks] = useState([]);
+  const [villains, setVillains] = useState([]);
 
   return (
     <MainContext.Provider
@@ -20,14 +14,6 @@ function MainProvider({ children }) {
         setBooks,
         villains,
         setVillains,
-        villainsAmount,
-        setVillainsAmount,
-        villainsListing,
-        setVillainsListing,
-        booksAmount,
-        setBooksAmount,
-        booksListing,
-        setBooksListing,
       }}
     >
       {children}

@@ -1,44 +1,34 @@
 import { Link, useParams } from "react-router-dom";
-import { useMainContext } from "../contexts/MainContext";
-import useFetchContent from "../hooks/useFetchContent";
+import { useVillains } from "../hooks/useFetchContent";
 import Title from "../components/Title";
 
 function Villain() {
-  const parentUrl = "villains";
   let { id } = useParams();
   id = Number(id);
-  const { villains, setVillains } = useMainContext();
 
-  const { isLoading, isLoaded } = useFetchContent(
-    `https://stephen-king-api.onrender.com/api/${parentUrl}`,
-    villains,
-    setVillains
-  );
+  const { villains, loadingStatus } = useVillains();
 
-  if (isLoading) {
+  if (loadingStatus === "pending" || loadingStatus === "idle") {
     return <div>Loading...</div>;
   }
-  if (!isLoaded) {
+
+  if (loadingStatus === "failed") {
     return <div>Failed to load</div>;
   }
-  let lastVillainId, nextVillainId, previousVillainId;
-  if (isLoaded) {
-    // lastVillainId = villains.at(-1).id;
-    lastVillainId = villains[villains.length - 1].id;
-    nextVillainId = id === lastVillainId ? 1 : id + 1;
-    previousVillainId = id === 1 ? lastVillainId : id - 1;
-  }
 
-  const currentVillain = villains[id - 1];
+  const currentVillainIndex = villains.findIndex(
+    (villain) => villain.id === id
+  );
+  const nextVillainId =
+    villains[(currentVillainIndex + 1) % villains.length].id;
+  const previousVillainId =
+    villains[(currentVillainIndex - 1 + villains.length) % villains.length].id;
+
+  const currentVillain = villains[currentVillainIndex];
   const { id: index, books, name, gender, status } = currentVillain;
 
-  const isBooksEmpty = books.length === 0;
-
-  let bookTitle, bookURL, bookId;
-  if (!isBooksEmpty) {
-    ({ title: bookTitle, url: bookURL } = books[0]);
-    bookId = bookURL.split("/").at(-1);
-  }
+  const { title: bookTitle, url: bookURL } = books[0];
+  const bookId = bookURL.split("/").at(-1);
 
   return (
     <div className="wrapper-small centered">
@@ -59,10 +49,10 @@ function Villain() {
           <p>ID: {index}</p>
           <p>GENDER: {gender !== null ? gender.toUpperCase() : "UNDEFINED"}</p>
           <p>STATUS: {status.toUpperCase()}</p>
-          {!isBooksEmpty && (
+          {books.length > 0 && (
             <p>
               BOOK:{" "}
-              <Link class="red" to={`/books/${bookId}`}>
+              <Link className="red" to={`/books/${bookId}`}>
                 {bookTitle.toUpperCase()}
               </Link>
             </p>

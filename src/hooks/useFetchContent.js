@@ -1,35 +1,53 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useMainContext } from "../contexts/MainContext";
 
 const useFetchContent = (url, state, setState) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState(
+    state.length !== 0 ? "success" : "idle"
+  ); // idle | pending | success | failed
 
-  const isStateEmpty = Object.keys(state).length === 0;
+  const fetchData = useCallback(async () => {
+    try {
+      setLoadingStatus("pending");
+      const res = await fetch(url);
+      const data = await res.json();
+      setState(data.data);
+      setLoadingStatus("success");
+    } catch (error) {
+      alert(`There was an error loading data: ${error.message}`);
+      setLoadingStatus("failed");
+    }
+  }, [setState, url]);
 
   useEffect(() => {
-    if (isStateEmpty) {
-      const fetchData = async () => {
-        try {
-          setIsLoading(true);
-          const res = await fetch(url);
-          const data = await res.json();
-          setState(data.data);
-        } catch (error) {
-          alert(`There was an error loading data: ${error.message}`);
-        } finally {
-          setIsLoading(false);
-          setIsLoaded(true);
-        }
-      };
+    if (loadingStatus !== "success") {
       fetchData();
-    } else {
-      setState(state);
-      setIsLoaded(true);
     }
-  }, [url, isStateEmpty, state, setState]);
+  }, [loadingStatus, fetchData]);
 
-  // state and setState don't need to be returned, becouse they are already changed in context
-  return { isLoading, isLoaded };
+  return { loadingStatus };
 };
 
-export default useFetchContent;
+export const useBooks = () => {
+  const { books = [], setBooks } = useMainContext();
+
+  const { loadingStatus } = useFetchContent(
+    `https://stephen-king-api.onrender.com/api/books`,
+    books,
+    setBooks
+  );
+
+  return { books, loadingStatus };
+};
+
+export const useVillains = () => {
+  const { villains = [], setVillains } = useMainContext();
+
+  const { loadingStatus } = useFetchContent(
+    `https://stephen-king-api.onrender.com/api/villains`,
+    villains,
+    setVillains
+  );
+
+  return { villains, loadingStatus };
+};

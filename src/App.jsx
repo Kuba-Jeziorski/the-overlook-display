@@ -18,9 +18,9 @@ function App() {
         <div className="home-bg">
           <Routes>
             <Route index element={<Homepage />} />
-            <Route path="/books" element={<Books url="books" />} />
+            <Route path="/books" element={<Books />} />
             <Route path="/books/:id" element={<Book />} />
-            <Route path="/villains" element={<Villains url="villains" />} />
+            <Route path="/villains" element={<Villains />} />
             <Route path="/villains/:id" element={<Villain />} />
           </Routes>
         </div>

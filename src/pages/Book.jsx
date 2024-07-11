@@ -1,36 +1,27 @@
 import { Link, useParams } from "react-router-dom";
-import { useMainContext } from "../contexts/MainContext";
-import useFetchContent from "../hooks/useFetchContent";
 import Title from "../components/Title";
+import { useBooks } from "../hooks/useFetchContent";
+import React from "react";
 
 function Book() {
-  const parentUrl = "books";
   let { id } = useParams();
   id = Number(id);
-  const { books, setBooks } = useMainContext();
 
-  const { isLoading, isLoaded } = useFetchContent(
-    `https://stephen-king-api.onrender.com/api/${parentUrl}`,
-    books,
-    setBooks
-  );
+  const { books, loadingStatus } = useBooks();
 
-  if (isLoading) {
+  if (loadingStatus === "pending" || loadingStatus === "idle") {
     return <div>Loading...</div>;
   }
-  if (!isLoaded) {
+  if (loadingStatus === "failed") {
     return <div>Failed to load</div>;
   }
 
-  let lastBookId, nextBookId, previousBookId;
-  if (isLoaded) {
-    // lastBookId = villains.at(-1).id;
-    lastBookId = books[books.length - 1].id;
-    nextBookId = id === lastBookId ? 1 : id + 1;
-    previousBookId = id === 1 ? lastBookId : id - 1;
-  }
+  const currentBookIndex = books.findIndex((book) => book.id === id);
+  const nextBookId = books[(currentBookIndex + 1) % books.length].id;
+  const previousBookId =
+    books[(currentBookIndex - 1 + books.length) % books.length].id;
 
-  const currentBook = books[id - 1];
+  const currentBook = books[currentBookIndex];
   const {
     id: index,
     Year: year,
@@ -39,17 +30,23 @@ function Book() {
     villains,
   } = currentBook;
 
-  const isVillainsEmpty = villains.length === 0;
-
-  let villainsArray;
-  if (!isVillainsEmpty) {
-    // villainsArray = [...villains];
-    villainsArray = [...villains].map((singleVillain) => ({
+  const villainsList = villains
+    .map((singleVillain) => ({
       ...singleVillain,
       villainId: singleVillain.url.split("/").at(-1),
-    }));
-    console.log(villainsArray);
-  }
+    }))
+    .map((villain, index) => (
+      <React.Fragment key={villain.villainId}>
+        {index > 0 && ", "}
+        <Link
+          key={villain.id}
+          to={`/villains/${villain.villainId}`}
+          className="red"
+        >
+          {`${villain.name.toUpperCase()}`}
+        </Link>
+      </React.Fragment>
+    ));
 
   return (
     <div className="wrapper-small centered">
@@ -60,30 +57,14 @@ function Book() {
             <Link className="link primary" to={`/books/${previousBookId}`}>
               PREVIOUS
             </Link>
-            <Link className="link primary" to={`/villains/${nextBookId}`}>
+            <Link className="link primary" to={`/books/${nextBookId}`}>
               NEXT
             </Link>
           </div>
           <p>ID: {index}</p>
           <p>YEAR: {year}</p>
           <p>PAGES: {pages}</p>
-          {!isVillainsEmpty && (
-            <p>
-              VILLAIN(S):
-              {villainsArray.map((villain, index) => (
-                <>
-                  {index > 0 && ","}
-                  <Link
-                    key={villain.id}
-                    to={`/villains/${villain.villainId}`}
-                    class="red"
-                  >
-                    {` ${villain.name.toUpperCase()}`}
-                  </Link>
-                </>
-              ))}
-            </p>
-          )}
+          {villainsList.length > 0 && <p>VILLAIN(S): {villainsList}</p>}
         </div>
         <div className="button-wrapper">
           <Link className="link secondary" to="/books">

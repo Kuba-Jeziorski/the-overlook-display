@@ -1,47 +1,29 @@
 import PropTypes from "prop-types";
-import { useEffect } from "react";
-import { useMainContext } from "../contexts/MainContext";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
-import useFetchContent from "../hooks/useFetchContent";
+import { useVillains } from "../hooks/useFetchContent";
 import Title from "../components/Title";
 import HeaderDescription from "../components/HeaderDescription";
 import Button from "../components/Button";
 
-function Villains({ url }) {
-  const {
-    villains,
-    setVillains,
-    villainsAmount,
-    setVillainsAmount,
-    villainsListing,
-    setVillainsListing,
-  } = useMainContext();
+function Villains() {
+  const [villainsAmount, setBooksAmount] = useState(3);
 
-  const { isLoading, isLoaded } = useFetchContent(
-    `https://stephen-king-api.onrender.com/api/${url}`,
-    villains,
-    setVillains
-  );
+  const { villains, loadingStatus } = useVillains();
 
-  useEffect(() => {
-    if (isLoaded) {
-      const newVillainsListing = villains.slice(0, villainsAmount);
-      setVillainsListing(newVillainsListing);
-    }
-  }, [villains, isLoaded, villainsAmount, setVillainsListing]);
-
-  const handleAmount = () => {
-    setVillainsAmount((amount) => amount + 3);
-
-    const newVillainsListing = villains.slice(0, villainsAmount);
-    setVillainsListing(newVillainsListing);
+  const handleAmountIncrease = () => {
+    setBooksAmount((amount) => amount + 3);
   };
 
-  if (isLoading) {
+  const villainsListing = useMemo(() => {
+    return villains.slice(0, villainsAmount);
+  }, [villains, villainsAmount]);
+
+  if (loadingStatus === "pending") {
     return <div>Loading...</div>;
   }
-  if (!isLoaded) {
+  if (loadingStatus === "failed") {
     return <div>Failed to load</div>;
   }
 
@@ -75,7 +57,7 @@ function Villains({ url }) {
           ))}
         </ul>
         <div className="button-wrapper">
-          <Button type="secondary" onPress={handleAmount}>
+          <Button type="secondary" onPress={handleAmountIncrease}>
             SEE MORE
           </Button>
         </div>
