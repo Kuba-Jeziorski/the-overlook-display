@@ -22,6 +22,7 @@ function App() {
             <Route path="/books/:id" element={<Book />} />
             <Route path="/villains" element={<Villains />} />
             <Route path="/villains/:id" element={<Villain />} />
+            <Route path="*" element={<h1>NOT FOUND</h1>} />
           </Routes>
         </div>
         <Footer>

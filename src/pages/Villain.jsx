@@ -19,6 +19,8 @@ function Villain() {
   const currentVillainIndex = villains.findIndex(
     (villain) => villain.id === id
   );
+  console.log(currentVillainIndex);
+
   const nextVillainId =
     villains[(currentVillainIndex + 1) % villains.length].id;
   const previousVillainId =
@@ -27,8 +29,11 @@ function Villain() {
   const currentVillain = villains[currentVillainIndex];
   const { id: index, books, name, gender, status } = currentVillain;
 
-  const { title: bookTitle, url: bookURL } = books[0];
-  const bookId = bookURL.split("/").at(-1);
+  let bookTitle, bookURL, bookId;
+  if (books.length > 0) {
+    ({ title: bookTitle, url: bookURL } = books[0]);
+    bookId = bookURL.split("/").at(-1);
+  }
 
   return (
     <div className="wrapper-small centered">
