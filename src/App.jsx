@@ -1,14 +1,14 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import "../src/index.css";
 
+import { MainProvider } from "./contexts/MainContext.jsx";
 import Homepage from "./pages/Homepage";
-import Books from "./pages/Books";
-import Villains from "./pages/Villains";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
-import { MainProvider } from "./contexts/MainContext.jsx";
-import "../src/index.css";
-import Villain from "./pages/Villain.jsx";
+import Books from "./pages/Books";
 import Book from "./pages/Book.jsx";
+import Villains from "./pages/Villains";
+import Villain from "./pages/Villain.jsx";
 
 function App() {
   return (

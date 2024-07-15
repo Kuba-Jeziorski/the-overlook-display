@@ -196,7 +196,7 @@ ul {
 }
 
 .container-listing-item {
-  width: calc(33% - (40px / 3));
+  width: calc(33.333% - (40px / 3));
   background-color: var(--color-white-faded);
   border-radius: var(--distance-20);
   padding: var(--distance-20) var(--distance-40);
@@ -214,15 +214,6 @@ ul {
   display: flex;
   justify-content: center;
 }
-
-/* to remove in the future */
-/* a.active {
-  color: var(--color-red);
-}
-
-nav a.active::before {
-  width: 100%;
-} */
 
 :is(.wrapper-medium, .wrapper-small) .link {
   font-size: var(--font-size-18);

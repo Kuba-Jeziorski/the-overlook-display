@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import Title from "../components/Title";
 import { useBooks } from "../hooks/useFetchContent";
 import React from "react";
+import AnimatedPage from "../components/AnimatedPage";
 
 function Book() {
   let { id } = useParams();
@@ -49,30 +50,32 @@ function Book() {
     ));
 
   return (
-    <div className="wrapper-small centered">
-      <div className="container">
-        <Title tag="h1">{title}</Title>
-        <div className="single-item-wrapper">
-          <div className="order-buttons-wrapper">
-            <Link className="link primary" to={`/books/${previousBookId}`}>
-              PREVIOUS
-            </Link>
-            <Link className="link primary" to={`/books/${nextBookId}`}>
-              NEXT
+    <AnimatedPage>
+      <div className="wrapper-small centered">
+        <div className="container">
+          <Title tag="h1">{title}</Title>
+          <div className="single-item-wrapper">
+            <div className="order-buttons-wrapper">
+              <Link className="link primary" to={`/books/${previousBookId}`}>
+                PREVIOUS
+              </Link>
+              <Link className="link primary" to={`/books/${nextBookId}`}>
+                NEXT
+              </Link>
+            </div>
+            <p>ID: {index}</p>
+            <p>YEAR: {year}</p>
+            <p>PAGES: {pages}</p>
+            {villainsList.length > 0 && <p>VILLAIN(S): {villainsList}</p>}
+          </div>
+          <div className="button-wrapper">
+            <Link className="link secondary" to="/books">
+              BACK TO BOOKS
             </Link>
           </div>
-          <p>ID: {index}</p>
-          <p>YEAR: {year}</p>
-          <p>PAGES: {pages}</p>
-          {villainsList.length > 0 && <p>VILLAIN(S): {villainsList}</p>}
-        </div>
-        <div className="button-wrapper">
-          <Link className="link secondary" to="/books">
-            BACK TO BOOKS
-          </Link>
         </div>
       </div>
-    </div>
+    </AnimatedPage>
   );
 }
 
