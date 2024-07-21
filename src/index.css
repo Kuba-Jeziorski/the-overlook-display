@@ -299,3 +299,15 @@ ul {
 .single-item-wrapper .red:hover {
   color: var(--color-red);
 }
+
+.home-bg:has(.not-found) > div {
+  height: 100%;
+}
+
+.not-found {
+  height: 100%;
+}
+
+.not-found a {
+  padding: var(--distance-10) var(--distance-40) !important;
+}

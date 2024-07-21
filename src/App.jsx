@@ -9,6 +9,7 @@ import Books from "./pages/Books";
 import Book from "./pages/Book.jsx";
 import Villains from "./pages/Villains";
 import Villain from "./pages/Villain.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
             <Route path="/books/:id" element={<Book />} />
             <Route path="/villains" element={<Villains />} />
             <Route path="/villains/:id" element={<Villain />} />
-            <Route path="*" element={<h1>NOT FOUND</h1>} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
         <Footer>
