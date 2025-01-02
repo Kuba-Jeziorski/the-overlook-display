@@ -102,6 +102,7 @@ h3 {
 h1 {
   font-size: var(--font-size-72);
   color: var(--color-yellow);
+  text-align: center;
 }
 
 a {
@@ -189,10 +190,11 @@ ul {
   flex-wrap: wrap;
   gap: var(--distance-20);
   justify-content: center;
-  max-height: 100%;
+  /* max-height: 100%; */
+  max-height: 300px;
   width: 100%;
   overflow: auto;
-  padding: 0 var(--distance-40);
+  padding: 0 var(--distance-20);
 }
 
 .container-listing-item {
